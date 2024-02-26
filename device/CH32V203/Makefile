@@ -19,13 +19,14 @@
 TOP_DIR = .
 DEV_DIR = CH32V203
 COM_DIR = common
+TOOL_DIR = $(DEV_DIR)/tools
 
-sinclude $(DEV_DIR)/tools/conf.mk
+sinclude $(TOOL_DIR)/conf.mk
 
 all: $(TARGET).hex flash
 
-sinclude $(DEV_DIR)/tools/build.mk
-sinclude $(DEV_DIR)/tools/mcu.mk
+sinclude $(TOOL_DIR)/build.mk
+sinclude $(TOOL_DIR)/mcu.mk
 
 
 # clean output dir 'obj/*', keep symbol link in top dir

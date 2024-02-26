@@ -16,7 +16,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #############################################################################
 
-sinclude $(DEV_DIR)/tools/config.mk
+sinclude $(TOOL_DIR)/config.mk
 
 VERBOSE = YES
 
