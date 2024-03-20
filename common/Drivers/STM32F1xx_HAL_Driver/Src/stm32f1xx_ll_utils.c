@@ -184,6 +184,7 @@ static ErrorStatus UTILS_PLL_IsBusy(void);
   * @{
   */
 
+#ifdef __CORTEX_M
 /**
   * @brief  This function configures the Cortex-M SysTick source to have 1ms time base.
   * @note   When a RTOS is used, it is recommended to avoid changing the Systick
@@ -228,6 +229,7 @@ void LL_mDelay(uint32_t Delay)
     }
   }
 }
+#endif
 
 /**
   * @}

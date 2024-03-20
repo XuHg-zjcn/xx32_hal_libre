@@ -70,7 +70,7 @@
 #define __CM3_CMSIS_VERSION       ((__CM3_CMSIS_VERSION_MAIN << 16U) | \
                                     __CM3_CMSIS_VERSION_SUB           )  /*!< \deprecated CMSIS HAL version number */
 
-#define __CORTEX_M                (3U)                                   /*!< Cortex-M Core */
+#define __QINGKE_M                (3U)                                   /*!< QingKe Core */
 
 /** __FPU_USED indicates whether an FPU is used or not.
     This core does not support an FPU at all
@@ -701,6 +701,11 @@ typedef struct
   __IOM uint32_t CMPL;                   /*!< Offset: 0x00C (R/W)  SysTick Compare/Reload Value Low 32-bits Register */
   __IOM uint32_t CMPH;                   /*!< Offset: 0x010 (R/W)  SysTick Compare/Reload Value High 32-bits Register */
 } SysTick_Type;
+
+/* Compatibility to CMSIS */
+#define SysTick_CTRL_COUNTFLAG_Msk         0U
+#define SysTick_CTRL_CLKSOURCE_Msk         0U
+#define SysTick_CTRL_TICKINT_Msk           0U
 
 /* SysTick Control Register Definitions */
 #define SysTick_CTRL_ENABLE_Pos             0U                                            /*!< SysTick CTRL: ENABLE Position */

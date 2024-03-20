@@ -70,7 +70,7 @@
 #define __CM3_CMSIS_VERSION       ((__CM3_CMSIS_VERSION_MAIN << 16U) | \
                                     __CM3_CMSIS_VERSION_SUB           )  /*!< \deprecated CMSIS HAL version number */
 
-#define __CORTEX_M                (3U)                                   /*!< Cortex-M Core */
+#define __QINGKE_M                (4U)                                   /*!< QingKe Core */
 
 /** __FPU_USED indicates whether an FPU is used or not.
     This core does not support an FPU at all
@@ -703,6 +703,9 @@ typedef struct
   __IOM uint32_t CMPH;                   /*!< Offset: 0x014 (R/W)  SysTick Compare/Reload Value High 32-bits Register */
 } SysTick_Type;
 
+/* Compatibility to CMSIS */
+#define SysTick_CTRL_COUNTFLAG_Msk         0U                                             //Please use SysTick_SR_COUNTFLAG instead
+
 /* SysTick Control Register Definitions */
 #define SysTick_CTRL_SWIE_Pos              31U                                            /*!< SysTick CTRL: SWIE Position */
 #define SysTick_CTRL_SWIE_Msk              (1UL << SysTick_CTRL_SWIE_Pos)                 /*!< SysTick CTRL: SWIE Mask */
@@ -726,8 +729,8 @@ typedef struct
 #define SysTick_CTRL_ENABLE_Msk            (1UL /*<< SysTick_CTRL_ENABLE_Pos*/)           /*!< SysTick CTRL: ENABLE Mask */
 
 /* SysTick Status Register Definitions */
-#define SysTick_SR_CNTIF_Pos                0U                                            /*!< SysTick SR: CNTIF Position */
-#define SysTick_SR_CNTIF_Msk               (1UL /*<< SysTick_LOAD_RELOAD_Pos*/)           /*!< SysTick SR: CNTIF Mask */
+#define SysTick_SR_COUNTFLAG_Pos            0U                                            /*!< SysTick SR: COUNTFLAG Position */
+#define SysTick_SR_COUNTFLAG_Msk           (1UL /*<< SysTick_SR_COUNTFLAG_Pos*/)          /*!< SysTick SR: COUNTFLAG Mask */
 
 /* SysTick Current Low Register Definitions */
 #define SysTick_CNTL_CURRENT_Pos            0U                                            /*!< SysTick CNTL: CURRENT Position */
@@ -1894,7 +1897,7 @@ __STATIC_INLINE void SysTick_SetCMP(uint64_t cmp)
  */
 __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
 {
-  if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk)
+  if ((ticks - 1UL) > SysTick_CMPL_RELOAD_Msk)
   {
     return (1UL);                                                   /* Reload value impossible */
   }

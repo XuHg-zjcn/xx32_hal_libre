@@ -203,6 +203,7 @@ __STATIC_INLINE uint32_t LL_GetFlashSize(void)
   * @}
   */
 
+#ifdef __CORTEX_M
 /** @defgroup UTILS_LL_EF_DELAY DELAY
   * @{
   */
@@ -226,7 +227,7 @@ __STATIC_INLINE void LL_InitTick(uint32_t HCLKFrequency, uint32_t Ticks)
 
 void        LL_Init1msTick(uint32_t HCLKFrequency);
 void        LL_mDelay(uint32_t Delay);
-
+#endif
 /**
   * @}
   */
