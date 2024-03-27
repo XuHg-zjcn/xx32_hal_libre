@@ -86,6 +86,8 @@ SECTIONS
     ASSERT(( _bss_end <= _stack_begin ), "Error: RAM no space");
   } >RAM
 
+  PROVIDE( end = . );
+
   /* 计算gp寄存器 */
   __global_pointer$ = MIN(_sdata_begin_lma + 0x800,
                       MAX(_data_begin_lma + 0x800, _bss_end - 0x800));
