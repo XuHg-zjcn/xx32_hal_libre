@@ -23,6 +23,9 @@
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
+  * This file was modified
+  * Copyright (c) 2023 Xu Ruijun
+  * Change license under BSD 3-clause
   */
 
   .syntax unified
@@ -95,7 +98,7 @@ LoopFillZerobss:
   bcc FillZerobss
 
 /* Call static constructors */
-    bl __libc_init_array
+  //bl __libc_init_array
 /* Call the application's entry point.*/
   bl main
   bx lr

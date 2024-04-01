@@ -199,12 +199,41 @@ typedef enum
 
 /* Use of CMSIS compiler intrinsics for register exclusive access */
 /* Atomic 32-bit register access macro to set one or several bits */
+#ifdef __arm__
+#define ATOMIC_SET_BIT(REG, BIT)                             \
+  do {                                                       \
+    uint32_t val;                                            \
+    do {                                                     \
+      val = __LDREXW((__IO uint32_t *)&(REG)) | (BIT);       \
+    } while ((__STREXW(val,(__IO uint32_t *)&(REG))) != 0U); \
+  } while(0)
+#elif defined(__riscv)
 #define ATOMIC_SET_BIT(REG, BIT)   __AMOOR_W(BIT, &(REG))
+#endif
 
 /* Atomic 32-bit register access macro to clear one or several bits */
+#ifdef __arm__
+#define ATOMIC_CLEAR_BIT(REG, BIT)                           \
+  do {                                                       \
+    uint32_t val;                                            \
+    do {                                                     \
+      val = __LDREXW((__IO uint32_t *)&(REG)) & ~(BIT);      \
+    } while ((__STREXW(val,(__IO uint32_t *)&(REG))) != 0U); \
+  } while(0)
+#elif defined(__riscv)
 #define ATOMIC_CLEAR_BIT(REG, BIT) __AMOAND_W(~(BIT), &(REG))
+#endif
 
 /* Atomic 32-bit register access macro to clear and set one or several bits */
+#ifdef __arm__
+#define ATOMIC_MODIFY_REG(REG, CLEARMSK, SETMASK)                          \
+  do {                                                                     \
+    uint32_t val;                                                          \
+    do {                                                                   \
+      val = (__LDREXW((__IO uint32_t *)&(REG)) & ~(CLEARMSK)) | (SETMASK); \
+    } while ((__STREXW(val,(__IO uint32_t *)&(REG))) != 0U);               \
+  } while(0)
+#elif defined(__riscv)
 #define ATOMIC_MODIFY_REG(REG, CLEARMSK, SETMASK)                          \
   do {                                                                     \
     uint32_t val;                                                          \
@@ -212,6 +241,7 @@ typedef enum
       val = (__LR_W((__IO uint32_t *)&(REG)) & ~(CLEARMSK)) | (SETMASK); \
     } while ((__SC_W(val,(__IO uint32_t *)&(REG))) != 0U);               \
   } while(0)
+#endif
 
 /* Atomic 16-bit register access macro to set one or several bits */
 #define ATOMIC_SETH_BIT(REG, BIT)                            \

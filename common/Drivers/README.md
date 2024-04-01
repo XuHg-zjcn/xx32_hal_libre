@@ -31,6 +31,8 @@
 - CMSIS/Core/Include/cmsis_gcc.h (修改内链汇编)
 - Drivers/CMSIS/Core/Include/core_cm3.h (注释掉导致编译出错的代码)
 - Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h (适配CH32V)
+- Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/gcc/startup_stm32f103xb.s (注释掉`bl __libc_init_array`)
+- Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/gcc/startup_stm32f103x6.s (注释掉`bl __libc_init_array`)
 - STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h (#ifdef屏蔽掉不兼容的SysTick代码)
 ---
 

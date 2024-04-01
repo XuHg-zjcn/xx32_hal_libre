@@ -133,7 +133,13 @@
  */
 __STATIC_FORCEINLINE void __enable_irq(void)
 {
+#ifdef __arm__
+  __ASM volatile ("cpsie i" : : : "memory");
+#elif defined(__riscv)
   __ASM volatile ("csrsi mstatus, 0x0b");
+#else
+#error unknown architecture
+#endif
 }
 
 
@@ -144,7 +150,13 @@ __STATIC_FORCEINLINE void __enable_irq(void)
  */
 __STATIC_FORCEINLINE void __disable_irq(void)
 {
+#ifdef __arm__
+  __ASM volatile ("cpsid i" : : : "memory");
+#elif defined(__riscv)
   __ASM volatile ("csrci mstatus, 0x0b");
+#else
+#error unknown architecture
+#endif
 }
 
 
