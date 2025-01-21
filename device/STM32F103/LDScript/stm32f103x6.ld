@@ -28,6 +28,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
+/* some code copy from output of `arm-none-eabi-ld --verbose`, copyright notice below: */
+/* Copyright (C) 2014-2022 Free Software Foundation, Inc.
+   Copying and distribution of this script, with or without modification,
+   are permitted in any medium without royalty provided the copyright
+   notice and this notice are preserved.  */
 
 ENTRY( Reset_Handler )
 PROVIDE( _stack_size = 2048 );
@@ -60,6 +65,12 @@ SECTIONS
     *(.text)
     *(.text.*)
   } >FLASH AT>FLASH
+  .ARM.exidx   :
+  {
+    PROVIDE_HIDDEN (__exidx_start = .);
+    *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+    PROVIDE_HIDDEN (__exidx_end = .);
+  } >FLASH
 
   .rodata         : /*只读数据*/
   {
@@ -67,6 +78,7 @@ SECTIONS
     *(.rodata .rodata.*)
   } >FLASH AT>FLASH
 
+  . = ALIGN(4);
   PROVIDE( _sidata = . );
   .data           : /*已初始化的变量*/
   {
@@ -75,7 +87,7 @@ SECTIONS
     *(.data .data.*)
     PROVIDE( _edata = . );
   } >RAM AT>FLASH
-  PROVIDE( _program_end = . - _data_begin_lma + data_begin_vma ); /*程序结束，FLASH此后可以写自定义数据*/
+  PROVIDE( _program_end = . - _sdata + _sidata ); /*程序结束，FLASH此后可以写自定义数据*/
 
   .bss            : /*未初始化的变量*/
   {
@@ -87,5 +99,7 @@ SECTIONS
     PROVIDE( _ebss = . );
     ASSERT(( _ebss <= _stack_begin ), "Error: RAM no space");
   } >RAM
+  __end__ = .;
+  _end = .; PROVIDE (end = .);
 }
 

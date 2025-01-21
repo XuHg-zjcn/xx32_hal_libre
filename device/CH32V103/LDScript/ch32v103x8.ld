@@ -73,7 +73,7 @@ SECTIONS
     *(.sdata .sdata.*)
     PROVIDE(_data_end_lma = . );
   } >RAM AT>FLASH
-  PROVIDE( _program_end = . - _data_begin_lma + data_begin_vma ); /*程序结束，FLASH此后可以写自定义数据*/
+  PROVIDE( _program_end = . - _data_begin_lma + _data_begin_vma ); /*程序结束，FLASH此后可以写自定义数据*/
 
   .bss            : /*未初始化的变量*/
   {
