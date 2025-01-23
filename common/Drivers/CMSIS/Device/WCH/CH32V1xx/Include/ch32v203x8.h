@@ -70,18 +70,16 @@
  /*!< Interrupt Number Definition */
 typedef enum
 {
-/******  QingKeV3 Processor Exceptions Numbers ****************************************************/
-  NonMaskableInt_IRQn         = 2,      /*!< 2 Non Maskable Interrupt                             */
-  HardFault_IRQn              = 3,      /*!< 3 QingKeV3 Hard Fault Interrupt                     */
-  MemoryManagement_IRQn       = 4,      /*!< 4 QingKeV3 Memory Management Interrupt              */
-  BusFault_IRQn               = 5,      /*!< 5 QingKeV3 Bus Fault Interrupt                      */
-  UsageFault_IRQn             = 6,      /*!< 6 QingKeV3 Usage Fault Interrupt                    */
-  SVCall_IRQn                 = 11,     /*!< 11 QingKeV3 SV Call Interrupt                       */
-  DebugMonitor_IRQn           = 12,     /*!< 12 QingKeV3 Debug Monitor Interrupt                 */
-  PendSV_IRQn                 = 14,     /*!< 14 QingKeV3 Pend SV Interrupt                       */
-  SysTick_IRQn                = 15,     /*!< 15 QingKeV3 System Tick Interrupt                   */
+/******  QingKeV4 Processor PFIC Vector Table Interrupt Numbers ***********************************/
+  NonMaskableInt_IRQn         = 2,      /*!< 2 QingKeV4 Non Maskable Interrupt                    */
+  HardFault_IRQn              = 3,      /*!< 3 QingKeV4 Exception Interrupt                       */
+  EnviCall_M_mode_IRQn        = 5,      /*!< 5 QingKeV4 Environment call from M-mode Exception    */
+  EnviCall_U_mode_IRQn        = 8,      /*!< 8 QingKeV4 Environment call from U-mode Exception    */
+  Breakpoint_IRQn             = 9,      /*!< 9 QingKeV4 Breakpiunt Interrupt                      */
+  SysTick_IRQn                = 12,     /*!< 12 QingKeV4 System Tick Interrupt                    */
+  SoftwareInterrupt_IRQn      = 14,     /*!< 14 QingKeV4 Software Trigert Interrupt               */
 
-/******  CH32 specific Interrupt Numbers *********************************************************/
+/******  CH32 specific Interrupt Numbers **********************************************************/
   WWDG_IRQn                   = 16,     /*!< Window WatchDog Interrupt                            */
   PVD_IRQn                    = 17,     /*!< PVD through EXTI Line detection Interrupt            */
   TAMPER_IRQn                 = 18,     /*!< Tamper Interrupt                                     */

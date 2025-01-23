@@ -95,18 +95,18 @@ vectab:
 	j	Reset_Handler
 	j	NMI_Handler
 	j	HardFault_Handler
-	j	MemManage_Handler
-	j	BusFault_Handler
-	j	UsageFault_Handler
 	j	Default_Handler
 	j	Default_Handler
 	j	Default_Handler
 	j	Default_Handler
-	j	SVC_Handler
-	j	DebugMon_Handler
 	j	Default_Handler
-	j	PendSV_Handler
+	j	Default_Handler
+	j	Default_Handler
+	j	Default_Handler
 	j	SysTick_Handler
+	j	Default_Handler
+	j	SWI_Handler
+	j	Default_Handler
 	j	WWDG_IRQHandler
 	j	PVD_IRQHandler
 	j	TAMPER_IRQHandler
@@ -158,13 +158,8 @@ vectab:
 	.align  	2
 	.weak	NMI_Handler
 	.weak	HardFault_Handler
-	.weak	MemManage_Handler
-	.weak	BusFault_Handler
-	.weak	UsageFault_Handler
-	.weak	SVC_Handler
-	.weak	DebugMon_Handler
-	.weak	PendSV_Handler
 	.weak	SysTick_Handler
+	.weak	SWI_Handler
 	.weak	WWDG_IRQHandler
 	.weak	PVD_IRQHandler
 	.weak	TAMPER_IRQHandler
@@ -208,18 +203,8 @@ vectab:
 
 NMI_Handler:
 HardFault_Handler:
-MemManage_Handler:
-BusFault_Handler:
-UsageFault_Handler:
-Default_Handler:
-Default_Handler:
-Default_Handler:
-Default_Handler:
-SVC_Handler:
-DebugMon_Handler:
-Default_Handler:
-PendSV_Handler:
 SysTick_Handler:
+SWI_Handler:
 WWDG_IRQHandler:
 PVD_IRQHandler:
 TAMPER_IRQHandler:

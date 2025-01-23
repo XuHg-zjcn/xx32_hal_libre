@@ -70,18 +70,13 @@
  /*!< Interrupt Number Definition */
 typedef enum
 {
-/******  QingKeV3 Processor Exceptions Numbers ****************************************************/
-  NonMaskableInt_IRQn         = 2,      /*!< 2 Non Maskable Interrupt                             */
-  HardFault_IRQn              = 3,      /*!< 3 QingKeV3 Hard Fault Interrupt                     */
-  MemoryManagement_IRQn       = 4,      /*!< 4 QingKeV3 Memory Management Interrupt              */
-  BusFault_IRQn               = 5,      /*!< 5 QingKeV3 Bus Fault Interrupt                      */
-  UsageFault_IRQn             = 6,      /*!< 6 QingKeV3 Usage Fault Interrupt                    */
-  SVCall_IRQn                 = 11,     /*!< 11 QingKeV3 SV Call Interrupt                       */
-  DebugMonitor_IRQn           = 12,     /*!< 12 QingKeV3 Debug Monitor Interrupt                 */
-  PendSV_IRQn                 = 14,     /*!< 14 QingKeV3 Pend SV Interrupt                       */
-  SysTick_IRQn                = 15,     /*!< 15 QingKeV3 System Tick Interrupt                   */
+/******  QingKeV3 Processor PFIC Vector Table Interrupt Numbers ***********************************/
+  NonMaskableInt_IRQn         = 2,      /*!< 2 QingKeV3 Non Maskable Interrupt                    */
+  HardFault_IRQn              = 3,      /*!< 3 QingKeV3 Exception Interrupt                       */
+  SysTick_IRQn                = 12,     /*!< 12 QingKeV3 System Tick Interrupt                    */
+  SoftwareInterrupt_IRQn      = 14,     /*!< 14 QingKeV3 Software Trigert Interrupt               */
 
-/******  CH32 specific Interrupt Numbers *********************************************************/
+/******  CH32 specific Interrupt Numbers **********************************************************/
   WWDG_IRQn                   = 16,     /*!< Window WatchDog Interrupt                            */
   PVD_IRQn                    = 17,     /*!< PVD through EXTI Line detection Interrupt            */
   TAMPER_IRQn                 = 18,     /*!< Tamper Interrupt                                     */
