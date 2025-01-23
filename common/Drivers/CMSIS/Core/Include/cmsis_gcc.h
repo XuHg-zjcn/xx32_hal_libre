@@ -874,6 +874,8 @@ __STATIC_FORCEINLINE void __set_FPSCR(uint32_t fpscr)
 #define __SEV()                             __ASM volatile ("sev")
 
 
+//reference from RISC-V Spec Section p.181
+//  A.5 Code Porting and Mapping Guidelines Table A.4
 /**
   \brief   Instruction Synchronization Barrier
   \details Instruction Synchronization Barrier flushes the pipeline in the processor,
@@ -882,7 +884,14 @@ __STATIC_FORCEINLINE void __set_FPSCR(uint32_t fpscr)
  */
 __STATIC_FORCEINLINE void __ISB(void)
 {
+#ifdef __arm__
   __ASM volatile ("isb 0xF":::"memory");
+#elif defined(__riscv)
+  __ASM volatile ("fence.i\n"
+		  "fence r,r");
+#else
+#error unknown architecture
+#endif
 }
 
 
@@ -893,7 +902,13 @@ __STATIC_FORCEINLINE void __ISB(void)
  */
 __STATIC_FORCEINLINE void __DSB(void)
 {
+#ifdef __arm__
   __ASM volatile ("dsb 0xF":::"memory");
+#elif defined(__riscv)
+  __ASM volatile ("fence rw,rw");
+#else
+#error unknown architecture
+#endif
 }
 
 
@@ -904,7 +919,13 @@ __STATIC_FORCEINLINE void __DSB(void)
  */
 __STATIC_FORCEINLINE void __DMB(void)
 {
+#ifdef __arm__
   __ASM volatile ("dmb 0xF":::"memory");
+#elif defined(__riscv)
+  __ASM volatile ("fence rw,rw");
+#else
+#error unknown architecture
+#endif
 }
 
 

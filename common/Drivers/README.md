@@ -24,9 +24,6 @@
 - STM32F1xx_HAL_Driver/_htmresc/
 - STM32F1xx_HAL_Driver/README.md
 - STM32F1xx_HAL_Driver/Release_Notes.html
-### 会导致编译或链接错误
-- STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c
-- STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_timebase_rtc_alarm_template.c
 ### 已修改文件
 - CMSIS/Core/Include/cmsis_gcc.h (修改内链汇编)
 - Drivers/CMSIS/Core/Include/core_cm3.h (注释掉导致编译出错的代码)

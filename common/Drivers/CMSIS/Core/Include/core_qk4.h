@@ -1897,6 +1897,7 @@ __STATIC_INLINE void SysTick_SetCMP(uint64_t cmp)
  */
 __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
 {
+  SysTick->CTRL  = 0;
   if ((ticks - 1UL) > SysTick_CMPL_RELOAD_Msk)
   {
     return (1UL);                                                   /* Reload value impossible */
@@ -1905,7 +1906,9 @@ __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
   SysTick_SetCMP(ticks - 1UL);                                      /* set reload register */
   NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
   SysTick_SetCNT(0UL);                                              /* Load the SysTick Counter Value */
-  SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+  SysTick->CTRL  = SysTick_CTRL_INIT_Msk      |                     /* Init conter value */
+                   SysTick_CTRL_RELOADEN_Msk  |                     /* Reload 0/CMP when up/down arrived */
+                   SysTick_CTRL_CLKSOURCE_Msk |                     /* Using HCLK Timebase */
                    SysTick_CTRL_TICKINT_Msk   |
                    SysTick_CTRL_ENABLE_Msk;                         /* Enable SysTick IRQ and SysTick Timer */
   return (0UL);                                                     /* Function successful */
